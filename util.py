@@ -1,4 +1,4 @@
-def clean_alt_list(list_):
+def Clean_List_in_DF(list_):
 	list_ = list_.replace(', ', '","')
 	list_ = list_.replace('[', '["')
 	list_ = list_.replace(']', '"]')
