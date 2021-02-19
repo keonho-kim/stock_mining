@@ -1,5 +1,5 @@
-def Clean_List_in_DF(list_):
-	list_ = list_.replace(', ', '","')
-	list_ = list_.replace('[', '["')
-	list_ = list_.replace(']', '"]')
-	return list_
+def to_1D(series):
+	"""
+	variable should be Pandas Series
+	"""
+ return pd.Series([x for _list in series for x in _list])
