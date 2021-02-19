@@ -1,4 +1,5 @@
 def to_1D(series):
+	import pandas as pd
 	"""
 	variable should be Pandas Series
 	"""
