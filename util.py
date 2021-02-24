@@ -85,15 +85,25 @@ def clean_setup():
 
 	stock_name = list(company_dict.keys())
 
-	return  tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict
+	return tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict
 
 def clean_submssion(submissions):
+	"""
+	The function will extract tiem and mentioned companies from submission dataset
+	Three columns will be created in original pandas dataframe:
+	- time: exact time an article is created
+	- title_mentione_tickers: companies mentioned in title text
+	- body_mentioned_tickers: companies mentioned in body text
+	"""
 	import datetime
 	import pandas as pd
 	import string
 	import re
 	import numpy as np
-	
+	os.environ['TZ'] = 'America/New_York'
+	time.tzset()	
+
+
 	global tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict
 
 	submissions['time'] = None
@@ -151,13 +161,23 @@ def clean_submssion(submissions):
                 
             else:
                 submissions['body_mentioned_tickers'][idx] = np.nan
-	
+
+	return submissions
+
 def clean_comments(comments):
+	"""
+	The function will extract tiem and mentioned companies from submission dataset
+	Two columns will be created in original pandas dataframe:
+	- time: exact time an article is created
+	- body_mentioned_tickers: companies mentioned in body text
+	"""
 	import datetime
 	import pandas as pd
 	import string
 	import re
 	import numpy as np
+	os.environ['TZ'] = 'America/New_York'
+	time.tzset()	
 
 	global tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict
 
@@ -189,6 +209,7 @@ def clean_comments(comments):
 		else:
 			comments['body_mentioned_tickers'][idx] = np.nan
 
+	return comments
 def to_list(series):
 	"""
 	variable is a list stored as string in DataFrame
