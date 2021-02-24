@@ -86,7 +86,7 @@ def clean_setup(stock_list):
 	return tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict
 
 
-def clean_submssion(submissions):
+def clean_submssion(submissions, tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict):
 	"""
 	The function will extract tiem and mentioned companies from submission dataset
 	Three columns will be created in original pandas dataframe:
@@ -101,8 +101,6 @@ def clean_submssion(submissions):
 	import numpy as np
 	os.environ['TZ'] = 'America/New_York'
 	time.tzset()
-
-	global tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict
 
 	submissions['time'] = None
 	submissions['title_mentioned_tickers'] = None
@@ -162,7 +160,7 @@ def clean_submssion(submissions):
 
 	return submissions
 
-def clean_comments(comments):
+def clean_comments(comments, tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict):
 	"""
 	The function will extract tiem and mentioned companies from submission dataset
 	Two columns will be created in original pandas dataframe:
