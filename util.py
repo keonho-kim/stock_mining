@@ -9,7 +9,7 @@ def clean_setup():
 	"""
 
 	import pandas as pd
-	pd.set_option('mode.chained_assignment',  None) 
+	pd.set_option('mode.chained_assignment',  None)
 	import nltk
 	from nltk.corpus import stopwords
 	import string
@@ -87,7 +87,107 @@ def clean_setup():
 	
 	return  tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict
 
+def clean_submssion(submissions):
+	import datetime
+	import pandas as pd
+	import string
+	import re
+	import numpy as np
+	
+	global tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict
 
+	submissions['time'] = None
+	submissions['title_mentioned_tickers'] = None
+    submissions['body_mentioned_tickers'] = None
+    
+    for idx in range(len(submissions)):
+            submissions['time'][idx] = datetime.datetime.fromtimestamp(submissions['created_utc'][idx]).strftime('%Y-%m-%d-%H-%M')
+
+            if type(submissions['title'][idx]) != float:
+                # Extract mentioned tickers in title 
+                    # Eliminate speical letters in title
+                title_text = re.sub('[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#%&\\\=\(\'\"]', ' ', submissions['title'][idx])
+                title_text = set(title_text.split())
+                    # Extract mentioned tickers in title 
+                title_tickers_intersec = title_text.intersection(tickers)
+                title_tickers_intersec = list(title_tickers_intersec)
+                
+                title_dollar_tickers_intersec = title_text.intersection(dollar_tickers)
+                title_dollar_tickers_intersec = list(title_dollar_tickers_intersec)
+
+                title_dollar_tickers_lower_intersec = title_text.intersection(dollar_tickers_lower)
+                title_dollar_tickers_lower_intersec = list(title_dollar_tickers_lower_intersec)
+                
+                title_mentioned_companies = list(title_text.intersection(stock_name))
+
+                title_mentioned_tickers = list(set(title_tickers_intersec + 
+                                                [item.replace('$', '') for item in title_dollar_tickers_intersec] + 
+                                                [item.upper().replace('$', '') for item in title_dollar_tickers_lower_intersec] +
+                                                [company_dict[c] for c in title_mentioned_companies]))
+
+                submissions['title_mentioned_tickers'][idx] = title_mentioned_tickers
+
+            else:
+                submissions['title_mentioned_tickers'][idx] = np.nan
+
+            if type(submissions['selftext'][idx]) != float:
+                # Extract mentioned tickers in body (selftext)
+                    # Eliminate speical letters in body
+                body_text = re.sub('[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#%&\\\=\(\'\"]', '', str(submissions['selftext'][idx]))
+                body_text = re.sub('\n', '', body_text)
+                body_text = set(body_text.split())
+                    # Extract mentioned tickers in body 
+                body_tickers_intersec = list(body_text.intersection(tickers))
+                body_dollar_tickers_intersec = list(body_text.intersection(dollar_tickers))
+                body_dollar_tickers_lower_intersec = list(body_text.intersection(dollar_tickers_lower))
+                body_mentioned_companies = list(body_text.intersection(stock_name))
+
+                body_mentioned_tickers = list(set(body_tickers_intersec +
+                                                [item.replace('$', '') for item in body_dollar_tickers_intersec] + 
+                                                [item.upper().replace('$', '') for item in body_dollar_tickers_lower_intersec] +
+                                                [company_dict[c] for c in body_mentioned_companies]))
+                
+                submissions['body_mentioned_tickers'][idx] = body_mentioned_tickers
+                
+            else:
+                submissions['body_mentioned_tickers'][idx] = np.nan
+	
+def clean_comments(comments):
+	import datetime
+	import pandas as pd
+	import string
+	import re
+	import numpy as np
+
+	global tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict
+
+	comments['time'] = None
+	comments['body_mentioned_tickers'] = None
+        
+	for idx in range(len(comments)):
+
+		comments['time'][idx] = datetime.datetime.fromtimestamp(comments['created_utc'][idx]).strftime('%Y-%m-%d-%H-%M')
+		
+
+		if type(comments['body'][idx]) != float:
+			# Extract mentioned tickers in body (body)
+				# Eliminate speical letters in body
+			body_text = re.sub('[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#%&\\\=\(\'\"]', '', str(comments['body'][idx]))
+			body_text = re.sub('\n', '', body_text)
+			body_text = set(body_text.split())
+				# Extract mentioned tickers in body 
+			body_tickers_intersec = list(body_text.intersection(tickers))
+			body_dollar_tickers_intersec = list(body_text.intersection(dollar_tickers))
+			body_mentioned_companies = list(body_text.intersection(stock_name))
+
+			body_mentioned_tickers = list(set(body_tickers_intersec + 
+												[item.replace('$', '') for item in body_dollar_tickers_intersec] + 
+												[company_dict[c] for c in body_mentioned_companies]))
+
+			comments['body_mentioned_tickers'][idx] = body_mentioned_tickers
+			
+		else:
+			comments['body_mentioned_tickers'][idx] = np.nan
 
 def to_list(series):
 	"""
