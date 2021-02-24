@@ -175,7 +175,6 @@ def clean_comments(comments, tickers, dollar_tickers, dollar_tickers_lower, stoc
 	os.environ['TZ'] = 'America/New_York'
 	time.tzset()	
 
-	global tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict
 
 	comments['time'] = None
 	comments['body_mentioned_tickers'] = None
