@@ -16,7 +16,7 @@ def clean_setup():
 	import string
 	import re
 
-	nonlocal stock_list
+	global stock_list
 
 	nltk.download('stopwords')
 	li_stopwords = [word.upper() for word in list(stopwords.words('english'))]
