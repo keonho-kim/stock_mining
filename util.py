@@ -16,7 +16,7 @@ def clean_setup():
 	import string
 	import re
 
-	stock_list = pd.read_csv(path_data + "Stock_List.csv")
+	nonlocal stock_list
 
 	nltk.download('stopwords')
 	li_stopwords = [word.upper() for word in list(stopwords.words('english'))]
