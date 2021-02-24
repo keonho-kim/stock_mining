@@ -1,4 +1,4 @@
-def clean_setup():
+def clean_setup(stock_list):
 	"""
 	The function returns 4 list and 1 dict
 	- tickers (list) : tickers
