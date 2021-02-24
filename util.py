@@ -67,8 +67,9 @@ def clean_setup():
 	stock_name = stock_name.difference(set(removed_company_name))
 
 	stock_list['company_name'] = None
+
 	for i in range(len(stock_list)):
-    stock_list['company_name'][i] = stock_list['Name'][i].split(' ')[0]
+ 	   stock_list['company_name'][i] = stock_list['Name'][i].split(' ')[0]
 
 	company_dict = dict()
 	for name in stock_name:
