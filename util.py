@@ -84,7 +84,7 @@ def clean_setup():
 	company_dict['Yum'] = 'YUM'
 
 	stock_name = list(company_dict.keys())
-	
+
 	return  tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict
 
 def clean_submssion(submissions):
