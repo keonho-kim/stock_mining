@@ -16,8 +16,6 @@ def clean_setup(stock_list):
 	import string
 	import re
 
-	global stock_list
-
 	nltk.download('stopwords')
 	li_stopwords = [word.upper() for word in list(stopwords.words('english'))]
 	stopword = set(li_stopwords)
