@@ -10,13 +10,13 @@ def clean_setup():
 
 	import pandas as pd
 	pd.set_option('mode.chained_assignment',  None)
+
 	import nltk
 	from nltk.corpus import stopwords
 	import string
 	import re
 
-	stock_list = pd.read_csv(
-	    '/content/drive/MyDrive/Stock_Mining/Data/stock_list.csv')
+	global stock_list
 
 	nltk.download('stopwords')
 	li_stopwords = [word.upper() for word in list(stopwords.words('english'))]
@@ -72,20 +72,21 @@ def clean_setup():
  	   stock_list['company_name'][i] = stock_list['Name'][i].split(' ')[0]
 
 	company_dict = dict()
-	for name in stock_name:
-	    subset = stock_list[stock_list['company_name'] == name]
 
-    if len(subset) > 1:
-        continue
-    else:
-        company_dict[name] = subset['Symbol'].iloc[0]
-    
+	for name in stock_name:
+		subset = stock_list[stock_list['company_name'] == name]
+		if len(subset)>1:
+			continue
+		else:
+			company_dict[name] = subset['Symbol'].iloc[0]
+
 	company_dict['Amazon'] = 'AMZN'
 	company_dict['Yum'] = 'YUM'
 
 	stock_name = list(company_dict.keys())
 
 	return tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict
+
 
 def clean_submssion(submissions):
 	"""
@@ -101,8 +102,7 @@ def clean_submssion(submissions):
 	import re
 	import numpy as np
 	os.environ['TZ'] = 'America/New_York'
-	time.tzset()	
-
+	time.tzset()
 
 	global tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict
 
