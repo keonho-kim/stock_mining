@@ -99,6 +99,7 @@ def clean_submssion(submissions, tickers, dollar_tickers, dollar_tickers_lower, 
 	import string
 	import re
 	import numpy as np
+	import os
 	os.environ['TZ'] = 'America/New_York'
 	time.tzset()
 
@@ -172,6 +173,7 @@ def clean_comments(comments, tickers, dollar_tickers, dollar_tickers_lower, stoc
 	import string
 	import re
 	import numpy as np
+	import os
 	os.environ['TZ'] = 'America/New_York'
 	time.tzset()	
 
