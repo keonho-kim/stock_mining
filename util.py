@@ -108,59 +108,59 @@ def clean_submssion(submissions):
 
 	submissions['time'] = None
 	submissions['title_mentioned_tickers'] = None
-    submissions['body_mentioned_tickers'] = None
-    
-    for idx in range(len(submissions)):
-            submissions['time'][idx] = datetime.datetime.fromtimestamp(submissions['created_utc'][idx]).strftime('%Y-%m-%d-%H-%M')
+	submissions['body_mentioned_tickers'] = None
+	
+	for idx in range(len(submissions)):
+		submissions['time'][idx] = datetime.datetime.fromtimestamp(submissions['created_utc'][idx]).strftime('%Y-%m-%d-%H-%M')
 
-            if type(submissions['title'][idx]) != float:
-                # Extract mentioned tickers in title 
-                    # Eliminate speical letters in title
-                title_text = re.sub('[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#%&\\\=\(\'\"]', ' ', submissions['title'][idx])
-                title_text = set(title_text.split())
-                    # Extract mentioned tickers in title 
-                title_tickers_intersec = title_text.intersection(tickers)
-                title_tickers_intersec = list(title_tickers_intersec)
-                
-                title_dollar_tickers_intersec = title_text.intersection(dollar_tickers)
-                title_dollar_tickers_intersec = list(title_dollar_tickers_intersec)
+		if type(submissions['title'][idx]) != float:
+			# Extract mentioned tickers in title 
+				# Eliminate speical letters in title
+			title_text = re.sub('[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#%&\\\=\(\'\"]', ' ', submissions['title'][idx])
+			title_text = set(title_text.split())
+				# Extract mentioned tickers in title 
+			title_tickers_intersec = title_text.intersection(tickers)
+			title_tickers_intersec = list(title_tickers_intersec)
+			
+			title_dollar_tickers_intersec = title_text.intersection(dollar_tickers)
+			title_dollar_tickers_intersec = list(title_dollar_tickers_intersec)
 
-                title_dollar_tickers_lower_intersec = title_text.intersection(dollar_tickers_lower)
-                title_dollar_tickers_lower_intersec = list(title_dollar_tickers_lower_intersec)
-                
-                title_mentioned_companies = list(title_text.intersection(stock_name))
+			title_dollar_tickers_lower_intersec = title_text.intersection(dollar_tickers_lower)
+			title_dollar_tickers_lower_intersec = list(title_dollar_tickers_lower_intersec)
+			
+			title_mentioned_companies = list(title_text.intersection(stock_name))
 
-                title_mentioned_tickers = list(set(title_tickers_intersec + 
-                                                [item.replace('$', '') for item in title_dollar_tickers_intersec] + 
-                                                [item.upper().replace('$', '') for item in title_dollar_tickers_lower_intersec] +
-                                                [company_dict[c] for c in title_mentioned_companies]))
+			title_mentioned_tickers = list(set(title_tickers_intersec + 
+											[item.replace('$', '') for item in title_dollar_tickers_intersec] + 
+											[item.upper().replace('$', '') for item in title_dollar_tickers_lower_intersec] +
+											[company_dict[c] for c in title_mentioned_companies]))
 
-                submissions['title_mentioned_tickers'][idx] = title_mentioned_tickers
+			submissions['title_mentioned_tickers'][idx] = title_mentioned_tickers
 
-            else:
-                submissions['title_mentioned_tickers'][idx] = np.nan
+		else:
+			submissions['title_mentioned_tickers'][idx] = np.nan
 
-            if type(submissions['selftext'][idx]) != float:
-                # Extract mentioned tickers in body (selftext)
-                    # Eliminate speical letters in body
-                body_text = re.sub('[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#%&\\\=\(\'\"]', '', str(submissions['selftext'][idx]))
-                body_text = re.sub('\n', '', body_text)
-                body_text = set(body_text.split())
-                    # Extract mentioned tickers in body 
-                body_tickers_intersec = list(body_text.intersection(tickers))
-                body_dollar_tickers_intersec = list(body_text.intersection(dollar_tickers))
-                body_dollar_tickers_lower_intersec = list(body_text.intersection(dollar_tickers_lower))
-                body_mentioned_companies = list(body_text.intersection(stock_name))
+		if type(submissions['selftext'][idx]) != float:
+			# Extract mentioned tickers in body (selftext)
+				# Eliminate speical letters in body
+			body_text = re.sub('[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#%&\\\=\(\'\"]', '', str(submissions['selftext'][idx]))
+			body_text = re.sub('\n', '', body_text)
+			body_text = set(body_text.split())
+				# Extract mentioned tickers in body 
+			body_tickers_intersec = list(body_text.intersection(tickers))
+			body_dollar_tickers_intersec = list(body_text.intersection(dollar_tickers))
+			body_dollar_tickers_lower_intersec = list(body_text.intersection(dollar_tickers_lower))
+			body_mentioned_companies = list(body_text.intersection(stock_name))
 
-                body_mentioned_tickers = list(set(body_tickers_intersec +
-                                                [item.replace('$', '') for item in body_dollar_tickers_intersec] + 
-                                                [item.upper().replace('$', '') for item in body_dollar_tickers_lower_intersec] +
-                                                [company_dict[c] for c in body_mentioned_companies]))
-                
-                submissions['body_mentioned_tickers'][idx] = body_mentioned_tickers
-                
-            else:
-                submissions['body_mentioned_tickers'][idx] = np.nan
+			body_mentioned_tickers = list(set(body_tickers_intersec +
+											[item.replace('$', '') for item in body_dollar_tickers_intersec] + 
+											[item.upper().replace('$', '') for item in body_dollar_tickers_lower_intersec] +
+											[company_dict[c] for c in body_mentioned_companies]))
+			
+			submissions['body_mentioned_tickers'][idx] = body_mentioned_tickers
+			
+		else:
+			submissions['body_mentioned_tickers'][idx] = np.nan
 
 	return submissions
 
