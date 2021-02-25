@@ -213,8 +213,8 @@ def clean_comments(comments, tickers, dollar_tickers, dollar_tickers_lower, stoc
 
 def convert_time(str_time):
 	import datatime
-
-    converted_time = datetime.datetime.fromtimestamp(str_time).strftime('%Y-%m-%d-%H-%M')
+	
+	converted_time = datetime.datetime.fromtimestamp(str_time).strftime('%Y-%m-%d-%H-%M')
     
 	return converted_time
 
