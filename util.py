@@ -136,7 +136,7 @@ def clean_submssion(submissions, tickers, dollar_tickers, dollar_tickers_lower, 
 			submissions['title_mentioned_tickers'][idx] = title_mentioned_tickers
 
 		else:
-			submissions['title_mentioned_tickers'][idx] = np.nan
+			submissions['title_mentioned_tickers'][idx] = None
 
 		if type(submissions['selftext'][idx]) != float:
 			# Extract mentioned tickers in body (selftext)
@@ -158,7 +158,7 @@ def clean_submssion(submissions, tickers, dollar_tickers, dollar_tickers_lower, 
 			submissions['body_mentioned_tickers'][idx] = body_mentioned_tickers
 			
 		else:
-			submissions['body_mentioned_tickers'][idx] = np.nan
+			submissions['body_mentioned_tickers'][idx] = None
 
 	return submissions
 
@@ -206,7 +206,7 @@ def clean_comments(comments, tickers, dollar_tickers, dollar_tickers_lower, stoc
 			comments['body_mentioned_tickers'][idx] = body_mentioned_tickers
 			
 		else:
-			comments['body_mentioned_tickers'][idx] = np.nan
+			comments['body_mentioned_tickers'][idx] = None
 
 	return comments
 def to_list(series):
