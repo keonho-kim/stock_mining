@@ -21,7 +21,7 @@ def clean_setup(stock_list):
 	stopword = set(li_stopwords)
 
 	alphabets = list(string.ascii_uppercase)
-	eliminated_equities = ['CEO', 'USD', 'USA', 'LOVE', 'HOPE']
+	eliminated_equities = ['CEO', 'USD', 'USA', 'LOVE', 'HOPE', 'YOLO']
 
 	eliminated_equities = eliminated_equities + alphabets
 	eliminated_equities = set(eliminated_equities)
