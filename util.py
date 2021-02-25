@@ -209,6 +209,13 @@ def clean_comments(comments, tickers, dollar_tickers, dollar_tickers_lower, stoc
 			comments['body_mentioned_tickers'][idx] = None
 
 	return comments
+
+
+def convert_time(str_time):
+    converted_time = datetime.datetime.fromtimestamp(str_time).strftime('%Y-%m-%d-%H-%M')
+    return converted_time
+
+	
 def to_list(series):
 	"""
 	variable is a list stored as string in DataFrame
