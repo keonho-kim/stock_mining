@@ -212,6 +212,7 @@ def clean_comments(comments, tickers, dollar_tickers, dollar_tickers_lower, stoc
 				comments['body_mentioned_tickers'][idx] = body_mentioned_tickers
 			else:
 				comments['body_mentioned_tickers'][idx]	 = None
+				
 		else:
 			comments['body_mentioned_tickers'][idx] = None
 
