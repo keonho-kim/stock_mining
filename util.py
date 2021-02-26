@@ -134,7 +134,10 @@ def clean_submssion(submissions, tickers, dollar_tickers, dollar_tickers_lower, 
 											[item.upper().replace('$', '') for item in title_dollar_tickers_lower_intersec] +
 											[company_dict[c] for c in title_mentioned_companies]))
 
-			submissions['title_mentioned_tickers'][idx] = title_mentioned_tickers
+			if len(title_mentioned_tickers) != 0:
+				submissions['title_mentioned_tickers'][idx] = title_mentioned_tickers
+			else:
+				submissions['title_mentioned_tickers'][idx] = None
 
 		else:
 			submissions['title_mentioned_tickers'][idx] = None
@@ -155,9 +158,11 @@ def clean_submssion(submissions, tickers, dollar_tickers, dollar_tickers_lower, 
 											[item.replace('$', '') for item in body_dollar_tickers_intersec] + 
 											[item.upper().replace('$', '') for item in body_dollar_tickers_lower_intersec] +
 											[company_dict[c] for c in body_mentioned_companies]))
-			
-			submissions['body_mentioned_tickers'][idx] = body_mentioned_tickers
-			
+
+			if len(body_mentioned_tickers) != 0:
+				submissions['body_mentioned_tickers'][idx] = body_mentioned_tickers
+			else:
+				submissions['body_mentioned_tickers'][idx] = None
 		else:
 			submissions['body_mentioned_tickers'][idx] = None
 
@@ -203,9 +208,10 @@ def clean_comments(comments, tickers, dollar_tickers, dollar_tickers_lower, stoc
 			body_mentioned_tickers = list(set(body_tickers_intersec + 
 												[item.replace('$', '') for item in body_dollar_tickers_intersec] + 
 												[company_dict[c] for c in body_mentioned_companies]))
-
-			comments['body_mentioned_tickers'][idx] = body_mentioned_tickers
-			
+			if len(body_mentioned_tickers) != 0:
+				comments['body_mentioned_tickers'][idx] = body_mentioned_tickers
+			else:
+				comments['body_mentioned_tickers'][idx]	 = None
 		else:
 			comments['body_mentioned_tickers'][idx] = None
 
