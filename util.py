@@ -22,7 +22,7 @@ def clean_setup(stock_list):
 
 	alphabets = list(string.ascii_uppercase)
 	eliminated_equities = ['CEO', 'USD', 'USA', 'LOVE', 'HOPE', 'YOLO']
-	
+
 
 	eliminated_equities = eliminated_equities + alphabets
 	eliminated_equities = set(eliminated_equities)
@@ -61,7 +61,7 @@ def clean_setup(stock_list):
                         'Team', 'Northern', 'Canterbutty', ' Bug', 'Pros', 'Whole', 'Enable', 'Artisan', 'Iron', 'Insight', 'Harbor', 'Carnival', 'Camping', 'Regions', 'Norfolk', 'Genesis', ' Solaris', 'Kernel', 'Plug',
                         'Phantom', 'Oxford', 'Energy', 'Matthews', 'Nine', 'Tattooed', 'NCS', 'Inspired', 'Navigator', 'Advanced', 'Safe', 'Smart', 'Sphere', 'Protective', 'My', 'Population', 'A.', 'Forum', 'Polar',
                         'Glory', 'Moody\'s', 'California', 'Diamond', 'Foresight', 'Moog', 'Cooper', 'Cowen', 'Allstate', 'Air', 'Concord', 'Rogers', 'Kelly', 'Quotient', 'MTBC', 'Summit', 'Heico', 'Acadia', 'Vector',
-                        'Central', 'Fox', 'Unilever', 'Cogent', 'HEICO', 'Juniper', 'Asia', 'Delta']
+                        'Central', 'Fox', 'Unilever', 'Cogent', 'HEICO', 'Juniper', 'Asia', 'Delta', 'Hope']
 
 	stock_name = stock_name.difference(set(removed_company_name))
 
