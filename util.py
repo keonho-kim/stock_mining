@@ -10,7 +10,7 @@ def clean_setup(stock_list):
 
     import pandas as pd
     pd.set_option('mode.chained_assignment',  None)
-
+    import nltk
     nltk.download('stopwords')
 
     li_stopwords = [word.upper() for word in list(stopwords.words('english'))]
