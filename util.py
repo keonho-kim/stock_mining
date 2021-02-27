@@ -61,7 +61,7 @@ def clean_setup(stock_list):
                         'Team', 'Northern', 'Canterbutty', ' Bug', 'Pros', 'Whole', 'Enable', 'Artisan', 'Iron', 'Insight', 'Harbor', 'Carnival', 'Camping', 'Regions', 'Norfolk', 'Genesis', ' Solaris', 'Kernel', 'Plug',
                         'Phantom', 'Oxford', 'Energy', 'Matthews', 'Nine', 'Tattooed', 'NCS', 'Inspired', 'Navigator', 'Advanced', 'Safe', 'Smart', 'Sphere', 'Protective', 'My', 'Population', 'A.', 'Forum', 'Polar',
                         'Glory', 'Moody\'s', 'California', 'Diamond', 'Foresight', 'Moog', 'Cooper', 'Cowen', 'Allstate', 'Air', 'Concord', 'Rogers', 'Kelly', 'Quotient', 'MTBC', 'Summit', 'Heico', 'Acadia', 'Vector',
-                        'Central', 'Fox', 'Unilever', 'Cogent', 'HEICO', 'Juniper', 'Asia', 'Delta', 'Hope']
+                        'Central', 'Fox', 'Unilever', 'Cogent', 'HEICO', 'Juniper', 'Asia', 'Delta', 'Hope', 'Stock']
 
 	stock_name = stock_name.difference(set(removed_company_name))
 
@@ -212,7 +212,7 @@ def clean_comments(comments, tickers, dollar_tickers, dollar_tickers_lower, stoc
 				comments['body_mentioned_tickers'][idx] = body_mentioned_tickers
 			else:
 				comments['body_mentioned_tickers'][idx]	 = None
-				
+
 		else:
 			comments['body_mentioned_tickers'][idx] = None
 
