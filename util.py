@@ -64,7 +64,8 @@ def clean_setup(stock_list):
                         'Central', 'Fox', 'Unilever', 'Cogent', 'HEICO', 'Juniper', 'Asia', 'Delta', 'Hope', 'Stock']
 
 	stock_name = stock_name.difference(set(removed_company_name))
-
+	
+	stock_list = stock_list[stock_list['Symbol'].isin(list(tickers))] 
 	stock_list['company_name'] = None
 
 	for i in range(len(stock_list)):
