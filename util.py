@@ -11,38 +11,34 @@ def clean_setup(stock_list):
 	import pandas as pd
 	pd.set_option('mode.chained_assignment',  None)
 
-	import nltk
-	from nltk.corpus import stopwords
-	import string
-	import re
-
 	nltk.download('stopwords')
-	li_stopwords = [word.upper() for word in list(stopwords.words('english'))]
-	stopword = set(li_stopwords)
+    li_stopwords = [word.upper() for word in list(stopwords.words('english'))]
+    stopword = set(li_stopwords)
 
-	alphabets = list(string.ascii_uppercase)
-	eliminated_equities = ['CEO', 'USD', 'USA', 'LOVE', 'HOPE', 'YOLO']
+    alphabets = list(string.ascii_uppercase)
+    eliminated_equities = ['CEO', 'USD', 'USA', 'LOVE', 'HOPE', 'YOLO']
 
 
-	eliminated_equities = eliminated_equities + alphabets
-	eliminated_equities = set(eliminated_equities)
+    eliminated_equities = eliminated_equities + alphabets
+    eliminated_equities = set(eliminated_equities)
 
-	symbols = set(stock_list['Symbol'])
-	adjusted_symbols = symbols.difference(stopword)
-	adjusted_symbols = adjusted_symbols.difference(eliminated_equities)
+    symbols = set(stock_list['Symbol'])
+    adjusted_symbols = symbols.difference(stopword)
+    adjusted_symbols = adjusted_symbols.difference(eliminated_equities)
 
-	tickers = adjusted_symbols
-	dollar_tickers = set(['$' + ticker for ticker in adjusted_symbols])
-	dollar_tickers_lower = set(['$' + ticker.lower()
-	                           for ticker in adjusted_symbols])
+    tickers = adjusted_symbols
+    dollar_tickers = set(['$' + ticker for ticker in adjusted_symbols])
+    dollar_tickers_lower = set(['$' + ticker.lower()
+                                for ticker in adjusted_symbols])
 
-	stock_name = stock_list[stock_list['Market'].isin(['NYSE', 'NASDAQ'])]
-	stock_name = list(stock_name['Name'])
-	stock_name = [name.split(' ')[0]
-	                         for name in stock_name if 'Acquisition' not in name.split(' ')]
-	stock_name = set(stock_name).difference(alphabets)
+    stock_list = stock_list[stock_list['Symbol'].isin(list(tickers))].reset_index(drop=True)
+    stock_name = list(stock_list['Name'])
+    stock_name = [name.split(' ')[0]
+                                for name in stock_name if 'Acquisition' not in name.split(' ')]
 
-	removed_company_name = ['Walt', 'United', 'Sea', 'General', 'S&P', 'British', 'U.S.', 'Southern', 'Global', 'Palo', 'American', 'MSCI', 'VF', 'Zimmer', 'Kinder', 'American', 'Southwest', 'Ball', 'Sun', 'Arthur', 'Edison', 'Kansas', 'Invitation', 'China', 'Boston', 'Korea', 'W.', 'Universal', 'Advanced', 'Lincoln', 'Globel', 'First', 'West', 'Shaw', 'Texas', 'Ralph', 'Churchill',
+    stock_name = set(stock_name).difference(alphabets)
+
+    removed_company_name = ['Walt', 'United', 'Sea', 'General', 'S&P', 'British', 'U.S.', 'Southern', 'Global', 'Palo', 'American', 'MSCI', 'VF', 'Zimmer', 'Kinder', 'American', 'Southwest', 'Ball', 'Sun', 'Arthur', 'Edison', 'Kansas', 'Invitation', 'China', 'Boston', 'Korea', 'W.', 'Universal', 'Advanced', 'Lincoln', 'Globel', 'First', 'West', 'Shaw', 'Texas', 'Ralph', 'Churchill',
                         'US', 'Western', 'Host', 'Federal', 'National', 'Bloom', 'Affiliated', 'Life', 'Tim', 'Inspire', 'Apartment', 'Choice', 'New', 'Innovative', 'Clean', 'Switch', 'Bank', 'Canada',
                         'Healthcare', 'John', 'Agree', 'Ryman', 'Spirit', 'Black', 'Portland', 'Physicians', 'Hawaiian', 'Select', 'International', 'Armstrong', 'John', 'World', 'Data', 'Micro', 'Stewart',
                         'Exponent', 'Stealth', 'Liberty', 'Sigma', 'Arena', 'Level', 'Park', 'Thomson', 'Strategic', 'Medical', 'So-Young', 'News', 'BBQ', 'Berry', 'Wisdom', 'Capital', 'Comfort', 'Graphic',
@@ -61,27 +57,46 @@ def clean_setup(stock_list):
                         'Team', 'Northern', 'Canterbutty', ' Bug', 'Pros', 'Whole', 'Enable', 'Artisan', 'Iron', 'Insight', 'Harbor', 'Carnival', 'Camping', 'Regions', 'Norfolk', 'Genesis', ' Solaris', 'Kernel', 'Plug',
                         'Phantom', 'Oxford', 'Energy', 'Matthews', 'Nine', 'Tattooed', 'NCS', 'Inspired', 'Navigator', 'Advanced', 'Safe', 'Smart', 'Sphere', 'Protective', 'My', 'Population', 'A.', 'Forum', 'Polar',
                         'Glory', 'Moody\'s', 'California', 'Diamond', 'Foresight', 'Moog', 'Cooper', 'Cowen', 'Allstate', 'Air', 'Concord', 'Rogers', 'Kelly', 'Quotient', 'MTBC', 'Summit', 'Heico', 'Acadia', 'Vector',
-                        'Central', 'Fox', 'Unilever', 'Cogent', 'HEICO', 'Juniper', 'Asia', 'Delta', 'Hope', 'Stock']
+                        'Central', 'Fox', 'Unilever', 'Cogent', 'HEICO', 'Juniper', 'Asia', 'Delta', 'Hope', 'Stock', 'Life', 'Can', 'ONE', 'Origin', 'Genetic', 'Taylor', 'Cheetah', 'Deluxe', 'Diversified', 'Cheesecake',
+                        'Reading', 'Peoples', 'Travelers', 'Nuance', 'Align', 'Color', 'Virgin', 'Cross', 'Performed', 'Murphy', 'Business', 'Stanley', 'Northwest', 'Unique', 'Tennessee', 'Big', 'Church', 'Noodles', 'Intersect',
+                        'Preferred', 'Collectors', 'People\'s', 'Mid', 'UP', 'Wireless', 'Huntsman', 'Research', 'Pool', 'Dave', 'Ohio', 'Hub', 'Direxion', 'ishares', 'Platinum', 'Retail', 'Liquidity', 'Sound', 'Benchmark',
+                        'RealReal', 'Cohen', 'Midland', 'Butterfly', 'Viking', 'Coffee', 'Barron\'s', 'Richmond', 'Glob', 'Glacier', 'Desktop', 'Wells', 'Dolphin', 'Pacific', 'Hawkins', 'Philip', 'Darling', 'Children\'s',
+                        'Thunder', 'Hooker', 'Managed', 'Chico\'s', 'BEST', 'Medalist', 'Net', 'Union', 'Source', '1847', 'Bain', 'Simpson', 'Fulgent', 'Merit', 'Brady', 'Goldman', 'FAT', 'Protagonist', 'Smith', 'Fossil',
+                        'Corporacion', 'Lattice', 'Opera', 'Changed', 'Powered', 'Automatic', 'Heat', 'Interpace', 'Jazz', 'Clever', 'Intercorp', 'Illinois', 'Two', 'FLY', 'CTO', 'Blueprint', 'Herman', '111', 'Blink', 'Hanover',
+                        'Banner', 'Income', 'FB', 'Howard', 'Triumph', 'db', 'DB', 'Match', 'Turtle', 'Infastructure', 'Booking', 'Catcha', 'Flushing', 'Good', 'Koppers', 'Brooks', 'Albertsons', 'Pearson', 'Aware', 'Emerald', 'Adamas',
+                        'Four', 'Asure', 'Pioneer', 'German', 'Carter\'s', 'Evolving', 'Ashford', 'Best', 'Lion', 'Applied', 'Dream', 'Customers', '22nd', 'Gaming', 'St.', 'Johnson', 'Industria', 'UnitedStates', 'Safeguard',
+                        'Schlumberger', 'Reynolds', 'Sterling', 'Territorial', 'Ruth\'s', 'Trade', 'Cleveland', 'Provident', 'Structured', 'Goal', 'Merrill', 'Profound', 'Pinnacle', 'Heritage', 'Six', 'Sumo', 'Array', 'Sharps',
+                        'Multiplan', 'Lake', 'Sos', 'Simply', 'Goodyear', 'Tian', 'Saul', 'Penn', 'Alabama', 'Mercury', 'Easterly', 'Aikido', 'F5', 'Energizer', 'Wolverine', 'Parts', 'Solid', 'Alliance', 'Builders', '9F',
+                        'Orchid', 'Switchback', 'Alexander\'s', 'Retractable', 'Norwegian', 'Accuray', 'Innovator', 'Barnes', 'Noah', 'Green', 'Williams', 'Extended', 'Frequency', 'Financial', 'Uranium', 'Floor', 'Mustang',
+                        'IF', 'Lindsay', 'Rollins', 'Alpha', 'Lightspeed', 'Horizon', 'Queens', 'Bar', 'Relay', 'Franchise', 'Indonesia', 'Investors', 'Knowledge', 'Selective', 'Empire', 'Grocery', 'Arbor', 'Trinity', 'Dover',
+                        'Bowl', 'Express', 'Formula', 'Value', 'Independence', 'NorthWestern', 'Lawson', 'bluebird', 'Sixth', 'Americas', 'Compass', 'Westwood', 'Tyson', 'Proto', 'MIX', 'Discover', 'Carriage', 'Independent',
+                        'GreenPower', '9', 'Chicago', 'Twin', 'Legacy', 'Score', 'Evans', 'Flexible', 'Shift', 'Integrated', 'Partners', 'Mid-America', 'Mind', 'Huron', 'Liquid', 'Third', 'Lexington', 'Tennant', 'Columbia',
+                        'Frontdoor', 'Equitable', 'Aurora', 'Aesthetic', 'Victory', 'Fluor', 'Progressive', 'Fusion', 'Installed', 'Porch', 'Morgan', 'Full', 'Scholastic', 'Flux', 'Pilgrims', 'Nordic', 'CSI', 'Federated',
+                        'Allegiant', 'Fate', 'Nicholas', 'Gates', 'Jack', 'Phathom', 'Cincinnati', 'Colony', 'Flex', 'Flowers', 'Establishment', 'Consolidated', 'Chase', 'Special', 'Limestone', 'Oil', 'Merchants', 'Manchester',
+                        'Advent', 'Surface', 'Simon', 'Charles', 'Information', 'Village', 'Artesian', 'Intuit', 'Forward', 'Signature', 'Patriot', 'Precision', 'Ivy', 'Steven', 'Leap', 'Total', 'Fuel', 'Credit', 'Middlesex',
+                        'Harrow', 'Clear', 'Radius', 'Lantern', 'Capstone', 'Rocket', ' Points', 'Standard', 'Stepan', 'Build', 'Aethlon', 'Sandy']
 
-	stock_name = stock_name.difference(set(removed_company_name))
-	
-	stock_list = stock_list[stock_list['Symbol'].isin(list(tickers))] 
-	stock_list['company_name'] = None
+    removed_company_name = set(removed_company_name)
+    stock_name = stock_name.difference(removed_company_name)
 
-	for i in range(len(stock_list)):
- 	   stock_list['company_name'][i] = stock_list['Name'][i].split(' ')[0]
+    stock_list['company_name'] = None
 
-	company_dict = dict()
+    for i in range(len(stock_list)):
+        stock_list['company_name'][i] = stock_list['Name'][i].split(' ')[0]
 
-	for name in stock_name:
-		subset = stock_list[stock_list['company_name'] == name]
-		if len(subset)>1:
-			continue
-		else:
-			company_dict[name] = subset['Symbol'].iloc[0]
+    company_dict = dict()
 
-	company_dict['Amazon'] = 'AMZN'
-	company_dict['Yum'] = 'YUM'
+    for name in stock_name:
+        subset = stock_list[stock_list['company_name'] == name]
+        if len(subset)>1:
+            continue
+        else:
+            company_dict[name] = subset['Symbol'].iloc[0]
+
+    company_dict['Amazon'] = 'AMZN'
+    company_dict['Yum'] = 'YUM'
+    company_dict['Disney'] = 'DIS'
+    company_dict['Blink Charging'] = 'BLNK'
 
 	stock_name = list(company_dict.keys())
 
