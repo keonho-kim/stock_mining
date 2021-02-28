@@ -273,3 +273,25 @@ def to_1D(series):
     """
     import pandas as pd
     return pd.Series([x for _list in series for x in _list])
+
+def extract_word(word):
+    import nltk
+    from nltk.corpus import stopwords
+    from nltk.tokenize import word_tokenize  
+    
+    nonPunct = re.compile('.*[A-Za-z0-9].*')
+
+    nltk.download('stopwords')
+    stop_words = set(stopwords.words('english'))
+
+    if type(word) != float:
+        word = word.lower()
+        word = re.sub('\'', ' ', word)
+        word = re.sub('\n', ' ', word, 0, re.I|re.S)
+        word = word_tokenize(word)
+        word_filtered= [w for w in word if not w in stop_words]
+        word_filtered = [w for w in word_filtered if nonPunct.match(w)]
+    else:
+        word_filtered = []
+
+    return len(word_filtered)
