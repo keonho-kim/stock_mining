@@ -8,6 +8,7 @@ def clean_setup(stock_list):
     - company_dict (dict) : dictionary with full text of company name : tickers
     """
 
+    import os
     import pandas as pd
     
     pd.set_option('mode.chained_assignment',  None)
