@@ -276,13 +276,18 @@ def to_1D(series):
 
 def extract_word(word):
     import re
+    from contextlib import redirect_stdout
+    import os
     import nltk
     from nltk.corpus import stopwords
     from nltk.tokenize import word_tokenize  
-    
+ 
+    with redirect_stdout(open(os.devnull, "w")):
+        nltk.download('punkt')
+        nltk.download('stopwords')
+ 
+
     nonPunct = re.compile('.*[A-Za-z0-9].*')
-    nltk.download('punkt')
-    nltk.download('stopwords')
     stop_words = set(stopwords.words('english'))
 
     if type(word) != float and word != '[removed]':
@@ -292,6 +297,7 @@ def extract_word(word):
         word = word_tokenize(word)
         word_filtered= [w for w in word if not w in stop_words]
         word_filtered = [w for w in word_filtered if nonPunct.match(w)]
+    
     else:
         word_filtered = []
 
