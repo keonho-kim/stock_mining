@@ -1,3 +1,4 @@
+# My personal codes
 def clean_setup(stock_list):
     """
     The function returns 4 list and 1 dict
