@@ -209,9 +209,7 @@ def extract_word(word, result_type):
     stop_words = set(stopwords.words('english'))
 
     if type(word) != float and word != '[removed]':
-        word = word.lower()
-        word = re.sub('\n', ' ', word)
-        word = re.sub('\'', ' ', word)
+        word = re.sub("\n|\|,", ' ', word) 
         word = re.sub('&amp;', '&', word)
         word = word.split(' ')
         word_filtered= [w for w in word if not w in stop_words]
