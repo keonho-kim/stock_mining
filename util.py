@@ -281,7 +281,7 @@ def extract_word(word):
     from nltk.tokenize import word_tokenize  
     
     nonPunct = re.compile('.*[A-Za-z0-9].*')
-
+    nltk.download('punkt')
     nltk.download('stopwords')
     stop_words = set(stopwords.words('english'))
 
