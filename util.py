@@ -274,7 +274,7 @@ def to_1D(series):
     import pandas as pd
     return pd.Series([x for _list in series for x in _list])
 
-def extract_word(word):
+def extract_num_word(word):
     import re
     from contextlib import redirect_stdout
     import os
