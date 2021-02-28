@@ -186,7 +186,7 @@ def to_1D(series):
     import pandas as pd
     return pd.Series([x for _list in series for x in _list])
 
-def extract_word(word, result_type=words):
+def extract_word(word, result_type):
     """
     extract words from text
     result_type
