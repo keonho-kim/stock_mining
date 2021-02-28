@@ -20,7 +20,8 @@ def clean_setup(stock_list):
 
     alphabets = list(string.ascii_uppercase)
 
-    eliminated_equities = ['CEO', 'USD', 'USA', 'LOVE', 'HOPE', 'YOLO']
+    eliminated_equities = ['CEO', 'USD', 'USA', 'LOVE', 'HOPE', 'YOLO', 'DD']
+    
 
     eliminated_equities = eliminated_equities + alphabets
     eliminated_equities = set(eliminated_equities)
@@ -287,7 +288,6 @@ def extract_num_word(word):
         nltk.download('punkt')
         nltk.download('stopwords')
  
-
     nonPunct = re.compile('.*[A-Za-z0-9].*')
     stop_words = set(stopwords.words('english'))
 
