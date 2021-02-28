@@ -278,6 +278,7 @@ def extract_num_word(word):
     import re
     from contextlib import redirect_stdout
     import os
+    
     import nltk
     from nltk.corpus import stopwords
     from nltk.tokenize import word_tokenize  
