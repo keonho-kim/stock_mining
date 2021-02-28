@@ -186,7 +186,13 @@ def to_1D(series):
     import pandas as pd
     return pd.Series([x for _list in series for x in _list])
 
-def extract_num_word(word):
+def extract_word(word, type):
+    """
+    extract words from text
+    type
+        words: return a list of words extracted from the text
+        count: return the number of words in the text
+    """
     import re
     from contextlib import redirect_stdout
     import os
