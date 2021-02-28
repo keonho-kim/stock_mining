@@ -114,7 +114,7 @@ def clean_setup(stock_list):
     return tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict
 
 
-def extract_tickers(text, stock_file):
+def extract_tickers(text, tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict):
     """
     The function will extract tiem and mentioned companies from submission dataset
     Three columns will be created in original pandas dataframe:
@@ -128,8 +128,6 @@ def extract_tickers(text, stock_file):
     import re
     import numpy as np
     import os
-
-    tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict = clean_setup(stock_file)
 
     if type(text) != float:
         # Extract mentioned tickers in title
@@ -167,8 +165,7 @@ def extract_tickers(text, stock_file):
 def convert_time(str_time):
     import datetime
 
-    converted_time = datetime.datetime.fromtimestamp(
-        str_time).strftime('%Y-%m-%d-%H-%M')
+    converted_time = datetime.datetime.fromtimestamp(str_time).strftime('%Y-%m-%d-%H-%M')
 
     return converted_time
 
