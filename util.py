@@ -186,12 +186,12 @@ def to_1D(series):
     import pandas as pd
     return pd.Series([x for _list in series for x in _list])
 
-def extract_word(word, type):
+def extract_word(word, result_type=words):
     """
     extract words from text
-    type
+    result_type
         words: return a list of words extracted from the text
-        count: return the number of words in the text
+        counts: return the number of words in the text
     """
     import re
     from contextlib import redirect_stdout
@@ -218,5 +218,8 @@ def extract_word(word, type):
     
     else:
         word_filtered = []
-
-    return len(word_filtered)
+    
+    if result_type == 'words':
+        return word_filtered
+    elif result_type == 'counts':
+        return len(word_filtered)
