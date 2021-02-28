@@ -275,6 +275,7 @@ def to_1D(series):
     return pd.Series([x for _list in series for x in _list])
 
 def extract_word(word):
+    import re
     import nltk
     from nltk.corpus import stopwords
     from nltk.tokenize import word_tokenize  
