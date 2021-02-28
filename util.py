@@ -196,7 +196,6 @@ def extract_word(word, result_type):
     import re
     from contextlib import redirect_stdout
     import os
-    
     import nltk
     from nltk.corpus import stopwords
     from nltk.tokenize import word_tokenize  
@@ -224,3 +223,10 @@ def extract_word(word, result_type):
         return word_filtered
     elif result_type == 'counts':
         return len(word_filtered)
+
+def calc_readability(word):
+	import os
+	os.system("pip install textstat")
+	from textstat import flesch_kincaid_grade as fk_grade
+	
+	return fk_grade(word)
