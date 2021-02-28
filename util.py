@@ -284,7 +284,7 @@ def extract_word(word):
     nltk.download('stopwords')
     stop_words = set(stopwords.words('english'))
 
-    if type(word) != float:
+    if type(word) != float and word != '[removed]':
         word = word.lower()
         word = re.sub('\'', ' ', word)
         word = re.sub('\n', ' ', word, 0, re.I|re.S)
