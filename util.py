@@ -211,7 +211,7 @@ def extract_word(word, result_type):
     if type(word) != float and word != '[removed]':
         word = word.lower()
         word = re.sub('\'', ' ', word)
-        word = re.sub('&amp', '&', word)
+        word = re.sub('&amp;', '&', word)
         word = re.sub('\n', ' ', word, 0, re.I|re.S)
         word = word_tokenize(word)
         word_filtered= [w for w in word if not w in stop_words]
