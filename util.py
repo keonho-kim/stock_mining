@@ -227,6 +227,9 @@ def extract_word(word, result_type):
         return len(word_filtered)
 
 def calc_readability(word):
+    """
+    This function returns Flesch-Kincaid Grade Level
+    """
 	try:
 		from textstat import flesch_kincaid_grade as fk_grade
 	except:
