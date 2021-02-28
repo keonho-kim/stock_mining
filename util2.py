@@ -107,7 +107,7 @@ def clean_setup(stock_list):
     return tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict
 
 
-def extract_tickers(text, tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict):
+def extract_tickers(text, stock_file):
     """
     The function will extract tiem and mentioned companies from submission dataset
     Three columns will be created in original pandas dataframe:
@@ -122,7 +122,8 @@ def extract_tickers(text, tickers, dollar_tickers, dollar_tickers_lower, stock_n
     import numpy as np
     import os
 
-    
+    tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict = clean_setup(stock_file)
+
     if type(text) != float:
         # Extract mentioned tickers in title
         # Eliminate speical letters in title
@@ -130,7 +131,7 @@ def extract_tickers(text, tickers, dollar_tickers, dollar_tickers_lower, stock_n
         text = set(text.split())
         # Extract mentioned tickers in title
         tickers_intersec = text.intersection(tickers)
-        tickers_intersec = list(title_tickers_intersec)
+        tickers_intersec = list(tickers_intersec)
 
         dollar_tickers_intersec = text.intersection(dollar_tickers)
         dollar_tickers_intersec = list(dollar_tickers_intersec)
