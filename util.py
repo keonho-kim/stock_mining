@@ -9,11 +9,17 @@ def clean_setup(stock_list):
     """
 
     import pandas as pd
+    
     pd.set_option('mode.chained_assignment',  None)
+    
     import nltk
     from nltk.corpus import stopwords
     import string
-    nltk.download('stopwords')
+
+    from contextlib import redirect_stdout
+    with redirect_stdout(open(os.devnull, "w")):
+        nltk.download('punkt')
+        nltk.download('stopwords')
 
     li_stopwords = [word.upper() for word in list(stopwords.words('english'))]
     stopword = set(li_stopwords)
@@ -107,7 +113,7 @@ def clean_setup(stock_list):
     return tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict
 
 
-def clean_submssion(submissions, tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict):
+def extract_tickers(text, stock_file):
     """
     The function will extract tiem and mentioned companies from submission dataset
     Three columns will be created in original pandas dataframe:
@@ -121,135 +127,42 @@ def clean_submssion(submissions, tickers, dollar_tickers, dollar_tickers_lower, 
     import re
     import numpy as np
     import os
-    import time
-    os.environ['TZ'] = 'America/New_York'
-    time.tzset()
 
-    submissions['time'] = None
-    submissions['title_mentioned_tickers'] = None
-    submissions['body_mentioned_tickers'] = None
+    tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict = clean_setup(stock_file)
 
-    for idx in range(len(submissions)):
-        submissions['time'][idx] = datetime.datetime.fromtimestamp(
-            submissions['created_utc'][idx]).strftime('%Y-%m-%d-%H-%M')
+    if type(text) != float:
+        # Extract mentioned tickers in title
+        # Eliminate speical letters in title
+        text = re.sub('[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#%&\\\=\(\'\"]', ' ', text)
+        text = set(text.split())
+        # Extract mentioned tickers in title
+        tickers_intersec = text.intersection(tickers)
+        tickers_intersec = list(tickers_intersec)
 
-        if type(submissions['title'][idx]) != float:
-            # Extract mentioned tickers in title
-            # Eliminate speical letters in title
-            title_text = re.sub(
-                '[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#%&\\\=\(\'\"]', ' ', submissions['title'][idx])
-            title_text = set(title_text.split())
-            # Extract mentioned tickers in title
-            title_tickers_intersec = title_text.intersection(tickers)
-            title_tickers_intersec = list(title_tickers_intersec)
+        dollar_tickers_intersec = text.intersection(dollar_tickers)
+        dollar_tickers_intersec = list(dollar_tickers_intersec)
 
-            title_dollar_tickers_intersec = title_text.intersection(
-                dollar_tickers)
-            title_dollar_tickers_intersec = list(title_dollar_tickers_intersec)
+        dollar_tickers_lower_intersec = text.intersection(dollar_tickers_lower)
+        dollar_tickers_lower_intersec = list(dollar_tickers_lower_intersec)
 
-            title_dollar_tickers_lower_intersec = title_text.intersection(
-                dollar_tickers_lower)
-            title_dollar_tickers_lower_intersec = list(
-                title_dollar_tickers_lower_intersec)
+        mentioned_companies = list(text.intersection(stock_name))
 
-            title_mentioned_companies = list(
-                title_text.intersection(stock_name))
+        mentioned_tickers = list(set(tickers_intersec +
+                                            [item.replace('$', '') for item in dollar_tickers_intersec] +
+                                            [item.upper().replace('$', '') for item in dollar_tickers_lower_intersec] +
+                                            [company_dict[c] for c in mentioned_companies]))
 
-            title_mentioned_tickers = list(set(title_tickers_intersec +
-                                               [item.replace('$', '') for item in title_dollar_tickers_intersec] +
-                                               [item.upper().replace('$', '') for item in title_dollar_tickers_lower_intersec] +
-                                               [company_dict[c] for c in title_mentioned_companies]))
-
-            if len(title_mentioned_tickers) != 0:
-                submissions['title_mentioned_tickers'][idx] = title_mentioned_tickers
-            else:
-                submissions['title_mentioned_tickers'][idx] = None
-
+        if len(mentioned_tickers) != 0:
+            result = mentioned_tickers
         else:
-            submissions['title_mentioned_tickers'][idx] = None
+            result = None
 
-        if type(submissions['selftext'][idx]) != float:
-            # Extract mentioned tickers in body (selftext)
-            # Eliminate speical letters in body
-            body_text = re.sub(
-                '[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#%&\\\=\(\'\"]', '', str(submissions['selftext'][idx]))
-            body_text = re.sub('\n', '', body_text)
-            body_text = set(body_text.split())
-            # Extract mentioned tickers in body
-            body_tickers_intersec = list(body_text.intersection(tickers))
-            body_dollar_tickers_intersec = list(
-                body_text.intersection(dollar_tickers))
-            body_dollar_tickers_lower_intersec = list(
-                body_text.intersection(dollar_tickers_lower))
-            body_mentioned_companies = list(body_text.intersection(stock_name))
+    else:
+        result = None
 
-            body_mentioned_tickers = list(set(body_tickers_intersec +
-                                              [item.replace('$', '') for item in body_dollar_tickers_intersec] +
-                                              [item.upper().replace('$', '') for item in body_dollar_tickers_lower_intersec] +
-                                              [company_dict[c] for c in body_mentioned_companies]))
+    return result
 
-            if len(body_mentioned_tickers) != 0:
-                submissions['body_mentioned_tickers'][idx] = body_mentioned_tickers
-            else:
-                submissions['body_mentioned_tickers'][idx] = None
-        else:
-            submissions['body_mentioned_tickers'][idx] = None
-
-    return submissions
-
-
-def clean_comments(comments, tickers, dollar_tickers, dollar_tickers_lower, stock_name, company_dict):
-    """
-    The function will extract tiem and mentioned companies from submission dataset
-    Two columns will be created in original pandas dataframe:
-    - time: exact time an article is created
-    - body_mentioned_tickers: companies mentioned in body text
-    """
-    import datetime
-    import pandas as pd
-    import string
-    import re
-    import numpy as np
-    import os
-    import time
-    os.environ['TZ'] = 'America/New_York'
-    time.tzset()
-
-    comments['time'] = None
-    comments['body_mentioned_tickers'] = None
-
-    for idx in range(len(comments)):
-
-        comments['time'][idx] = datetime.datetime.fromtimestamp(
-            comments['created_utc'][idx]).strftime('%Y-%m-%d-%H-%M')
-
-        if type(comments['body'][idx]) != float:
-            # Extract mentioned tickers in body (body)
-            # Eliminate speical letters in body
-            body_text = re.sub(
-                '[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#%&\\\=\(\'\"]', '', str(comments['body'][idx]))
-            body_text = re.sub('\n', '', body_text)
-            body_text = set(body_text.split())
-            # Extract mentioned tickers in body
-            body_tickers_intersec = list(body_text.intersection(tickers))
-            body_dollar_tickers_intersec = list(
-                body_text.intersection(dollar_tickers))
-            body_mentioned_companies = list(body_text.intersection(stock_name))
-
-            body_mentioned_tickers = list(set(body_tickers_intersec +
-                                              [item.replace('$', '') for item in body_dollar_tickers_intersec] +
-                                              [company_dict[c] for c in body_mentioned_companies]))
-            if len(body_mentioned_tickers) != 0:
-                comments['body_mentioned_tickers'][idx] = body_mentioned_tickers
-            else:
-                comments['body_mentioned_tickers'][idx] = None
-
-        else:
-            comments['body_mentioned_tickers'][idx] = None
-
-    return comments
-
-
+    
 def convert_time(str_time):
     import datetime
 
