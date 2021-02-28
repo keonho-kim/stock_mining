@@ -225,9 +225,13 @@ def extract_word(word, result_type):
         return len(word_filtered)
 
 def calc_readability(word):
-	import os
-	os.system("pip install textstat")
-	from textstat import flesch_kincaid_grade as fk_grade
+	try:
+		from textstat import flesch_kincaid_grade as fk_grade
+	except:
+		import os
+		os.system("pip install textstat")
+		from textstat import flesch_kincaid_grade as fk_grade
+	
 	if type(word) == str and word != '[removed]':
 		return fk_grade(word)
 	else:
