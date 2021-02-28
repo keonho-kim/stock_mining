@@ -129,24 +129,24 @@ def extract_tickers(text, tickers, dollar_tickers, dollar_tickers_lower, stock_n
         text = re.sub('[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#%&\\\=\(\'\"]', ' ', text)
         text = set(text.split())
         # Extract mentioned tickers in title
-        title_tickers_intersec = text.intersection(tickers)
-        title_tickers_intersec = list(title_tickers_intersec)
+        tickers_intersec = text.intersection(tickers)
+        tickers_intersec = list(title_tickers_intersec)
 
-        title_dollar_tickers_intersec = text.intersection(dollar_tickers)
-        title_dollar_tickers_intersec = list(title_dollar_tickers_intersec)
+        dollar_tickers_intersec = text.intersection(dollar_tickers)
+        dollar_tickers_intersec = list(dollar_tickers_intersec)
 
-        title_dollar_tickers_lower_intersec = text.intersection(dollar_tickers_lower)
-        title_dollar_tickers_lower_intersec = list(title_dollar_tickers_lower_intersec)
+        dollar_tickers_lower_intersec = text.intersection(dollar_tickers_lower)
+        dollar_tickers_lower_intersec = list(dollar_tickers_lower_intersec)
 
-        title_mentioned_companies = list(title_text.intersection(stock_name))
+        mentioned_companies = list(text.intersection(stock_name))
 
-        title_mentioned_tickers = list(set(title_tickers_intersec +
-                                            [item.replace('$', '') for item in title_dollar_tickers_intersec] +
-                                            [item.upper().replace('$', '') for item in title_dollar_tickers_lower_intersec] +
-                                            [company_dict[c] for c in title_mentioned_companies]))
+        mentioned_tickers = list(set(tickers_intersec +
+                                            [item.replace('$', '') for item in dollar_tickers_intersec] +
+                                            [item.upper().replace('$', '') for item in dollar_tickers_lower_intersec] +
+                                            [company_dict[c] for c in mentioned_companies]))
 
-        if len(title_mentioned_tickers) != 0:
-            result = title_mentioned_tickers
+        if len(mentioned_tickers) != 0:
+            result = mentioned_tickers
         else:
             result = None
 
