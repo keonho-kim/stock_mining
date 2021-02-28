@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 ## Custom functions
 
+=======
+# My personal codes
+>>>>>>> 6078afd1f011f9fc33d3c16d6a792e45cf821651
 def clean_setup(stock_list):
     """
     The function returns 4 list and 1 dict
