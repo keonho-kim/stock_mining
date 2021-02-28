@@ -228,5 +228,7 @@ def calc_readability(word):
 	import os
 	os.system("pip install textstat")
 	from textstat import flesch_kincaid_grade as fk_grade
-	
-	return fk_grade(word)
+	if type(word) == str and word != '[removed]':
+		return fk_grade(word)
+	else:
+		return None
