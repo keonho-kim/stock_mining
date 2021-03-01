@@ -36,7 +36,7 @@ def clean_setup(stock_list):
         'MAIN', 'MAC', 'MARK', 'MEN', 'MOD', 'MOM', 'NEW', 'NICE', 'ONTO', 'PLAY', 'PLAN', 'PRE','ROLL', 'RUN',
         'SAFE', 'SKY', 'SOLO', 'TEAM', 'TECH', 'TELL', 'TRUE', 'UK', 'VS', 'WELL', 'ZEAL', 'WOW', 'IPO',
         'ALTO', 'APPS', 'COKE', 'EAST', 'TEN', 'CUBA', 'SHIP', 'BF', 'CORN', 'DARE', 'LIFE', 'LIVE', 'MAN', 'MAX',
-        'MIND', 'PLUS', 'RISE', 'RIDE', 'PUMP', 'BILL'
+        'MIND', 'PLUS', 'RISE', 'RIDE', 'PUMP', 'BILL', 'RH'
         ]
     
 
@@ -95,7 +95,7 @@ def clean_setup(stock_list):
                                     'Frontdoor', 'Equitable', 'Aurora', 'Aesthetic', 'Victory', 'Fluor', 'Progressive', 'Fusion', 'Installed', 'Porch', 'Morgan', 'Full', 'Scholastic', 'Flux', 'Pilgrims', 'Nordic', 'CSI', 'Federated',
                                     'Allegiant', 'Fate', 'Nicholas', 'Gates', 'Jack', 'Phathom', 'Cincinnati', 'Colony', 'Flex', 'Flowers', 'Establishment', 'Consolidated', 'Chase', 'Special', 'Limestone', 'Oil', 'Merchants', 'Manchester',
                                     'Advent', 'Surface', 'Simon', 'Charles', 'Information', 'Village', 'Artesian', 'Intuit', 'Forward', 'Signature', 'Patriot', 'Precision', 'Ivy', 'Steven', 'Leap', 'Total', 'Fuel', 'Credit', 'Middlesex',
-                                    'Harrow', 'Clear', 'Radius', 'Lantern', 'Capstone', 'Rocket', ' Points', 'Standard', 'Stepan', 'Build', 'Aethlon', 'Sandy', 'Harmonic']
+                                    'Harrow', 'Clear', 'Radius', 'Lantern', 'Capstone', 'Rocket', ' Points', 'Standard', 'Stepan', 'Build', 'Aethlon', 'Sandy', 'Harmonic', 'Raymond']
 
     removed_company_name = set(removed_company_name)
     stock_name = stock_name.difference(removed_company_name)
