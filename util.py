@@ -44,14 +44,15 @@ def clean_setup(stock_list):
     symbols = set(stock_list['Symbol'])
     adjusted_symbols = symbols.difference(stopword)
     adjusted_symbols = adjusted_symbols.difference(eliminated_equities)
-
+    adjusted_symbols.update(['QQQ', 'TQQQ', 'SQQQ'])
+    
     tickers = adjusted_symbols
+    
     dollar_tickers = set(['$' + ticker for ticker in adjusted_symbols])
     dollar_tickers_lower = set(['$' + ticker.lower()
                                 for ticker in adjusted_symbols])
 
-    stock_list = stock_list[stock_list['Symbol'].isin(
-        list(tickers))].reset_index(drop=True)
+    stock_list = stock_list[stock_list['Symbol'].isin(list(tickers))].reset_index(drop=True)
     stock_name = list(stock_list['Name'])
     stock_name = [name.split(' ')[0]
                   for name in stock_name if 'Acquisition' not in name.split(' ')]
