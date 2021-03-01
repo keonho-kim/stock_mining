@@ -52,7 +52,8 @@ def clean_setup(stock_list):
     dollar_tickers = set(['$' + t for t in adjusted_symbols])
     dollar_tickers_lower = set(['$' + t.lower() for t in adjusted_symbols])
 
-    stock_list = stock_list[stock_list['Symbol'].isin(list(tickers))].reset_index(drop=True)
+    stock_list = stock_list[stock_list['Symbol'].isin(list(tickers))]
+    stock_list = stock_list.reset_index(drop=True)
     
     stock_name = list(stock_list['Name'])
     stock_name = [name.split(' ')[0] for name in stock_name if 'Acquisition' not in name.split(' ')]
