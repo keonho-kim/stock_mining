@@ -1,4 +1,4 @@
-# Custom functions: preprocessings
+ # Custom functions: preprocessings
 
 def clean_setup(stock_list):
     """
@@ -29,7 +29,13 @@ def clean_setup(stock_list):
 
     alphabets = list(string.ascii_uppercase)
 
-    eliminated_equities = ['CEO', 'USD', 'USA', 'LOVE', 'HOPE', 'YOLO', 'DD']
+    eliminated_equities = [
+        'CEO', 'USD', 'USA', 'LOVE', 'HOPE', 'YOLO', 'DD', 'ZEAL', 'STAY', 'STAR', 'ALLY', 'BEST', 'BEAT',
+        'CAP', 'CARE', 'CASH', 'BIG', 'CTO', 'DOG','EAT', 'ELSE', 'FAST', 'EVER', 'FAT', 'FLY', 'FUN', 
+        'FUND', 'FREE', 'GO', 'GOGO', 'GAIN', 'BRO', 'FOLD', 'GOOD', 'ING', 'INFO', 'KNOW', 'JAN', 'LOOP',
+        'MAIN', 'MAC', 'MARK', 'MEN', 'MOD', 'MOM', 'NEW', 'NICE', 'ONTO', 'PLAY', 'PLAN', 'PRE','ROLL', 'RUN',
+        'SAFE', 'SKY', 'SOLO', 'STAY', 'TEAM', 'TECH', 'TELL', 'TRUE', 'UK', 'VS', 'WELL', 'ZEAL', 'WOW'
+        ]
     
 
     eliminated_equities = eliminated_equities + alphabets
