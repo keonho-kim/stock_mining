@@ -34,7 +34,8 @@ def clean_setup(stock_list):
         'CAP', 'CARE', 'CASH', 'BIG', 'CTO', 'DOG','EAT', 'ELSE', 'FAST', 'EVER', 'FAT', 'FLY', 'FUN', 
         'FUND', 'FREE', 'GO', 'GOGO', 'GAIN', 'BRO', 'FOLD', 'GOOD', 'ING', 'INFO', 'KNOW', 'JAN', 'LOOP',
         'MAIN', 'MAC', 'MARK', 'MEN', 'MOD', 'MOM', 'NEW', 'NICE', 'ONTO', 'PLAY', 'PLAN', 'PRE','ROLL', 'RUN',
-        'SAFE', 'SKY', 'SOLO', 'STAY', 'TEAM', 'TECH', 'TELL', 'TRUE', 'UK', 'VS', 'WELL', 'ZEAL', 'WOW'
+        'SAFE', 'SKY', 'SOLO', 'STAY', 'TEAM', 'TECH', 'TELL', 'TRUE', 'UK', 'VS', 'WELL', 'ZEAL', 'WOW', 'IPO',
+        'ALTO', 'APPS', 'COKE', 'EAST', 'TEN', 'CUBA'
         ]
     
 
@@ -43,19 +44,16 @@ def clean_setup(stock_list):
 
     symbols = set(stock_list['Symbol'])
     adjusted_symbols = symbols.difference(stopword)
-    adjusted_symbols = adjusted_symbols.difference(eliminated_equities)
     adjusted_symbols.update(['QQQ', 'TQQQ', 'SQQQ'])
     
-    tickers = adjusted_symbols
+    tickers = adjusted_symbols.difference(eliminated_equities)
     
-    dollar_tickers = set(['$' + ticker for ticker in adjusted_symbols])
-    dollar_tickers_lower = set(['$' + ticker.lower()
-                                for ticker in adjusted_symbols])
+    dollar_tickers = set(['$' + t for t in adjusted_symbols])
+    dollar_tickers_lower = set(['$' + t.lower() for t in adjusted_symbols])
 
     stock_list = stock_list[stock_list['Symbol'].isin(list(tickers))].reset_index(drop=True)
     stock_name = list(stock_list['Name'])
-    stock_name = [name.split(' ')[0]
-                  for name in stock_name if 'Acquisition' not in name.split(' ')]
+    stock_name = [name.split(' ')[0] for name in stock_name if 'Acquisition' not in name.split(' ')]
 
     stock_name = set(stock_name).difference(alphabets)
 
@@ -101,8 +99,8 @@ def clean_setup(stock_list):
 
     stock_list['company_name'] = None
 
-    for i in range(len(stock_list)):
-        stock_list['company_name'][i] = stock_list['Name'][i].split(' ')[0]
+    for idx, row in stock_list.iterrows():
+        row['company_name'] = stock_list['Name'].iloc[idx].split(' ')[0]
 
     company_dict = dict()
 
