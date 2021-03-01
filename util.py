@@ -36,7 +36,7 @@ def clean_setup(stock_list):
         'MAIN', 'MAC', 'MARK', 'MEN', 'MOD', 'MOM', 'NEW', 'NICE', 'ONTO', 'PLAY', 'PLAN', 'PRE','ROLL', 'RUN',
         'SAFE', 'SKY', 'SOLO', 'STAY', 'TEAM', 'TECH', 'TELL', 'TRUE', 'UK', 'VS', 'WELL', 'ZEAL', 'WOW', 'IPO',
         'ALTO', 'APPS', 'COKE', 'EAST', 'TEN', 'CUBA', 'SHIP', 'BF', 'CORN', 'DARE', 'LIFE', 'LIVE', 'MAN', 'MAX',
-        'MIND', 'PLUS', 'RISE', 'RIDE', 'PUMP'
+        'MIND', 'PLUS', 'RISE', 'RIDE', 'PUMP', 'BILL'
         ]
     
 
@@ -53,10 +53,11 @@ def clean_setup(stock_list):
     dollar_tickers_lower = set(['$' + t.lower() for t in adjusted_symbols])
 
     stock_list = stock_list[stock_list['Symbol'].isin(list(tickers))].reset_index(drop=True)
+    
     stock_name = list(stock_list['Name'])
     stock_name = [name.split(' ')[0] for name in stock_name if 'Acquisition' not in name.split(' ')]
-
-    stock_name = set(stock_name).difference(alphabets)
+    stock_name = set(stock_name)
+    stock_name = stock_name.difference(alphabets)
 
     removed_company_name = ['Walt', 'United', 'Sea', 'General', 'S&P', 'British', 'U.S.', 'Southern', 'Global', 'Palo', 'American', 'MSCI', 'VF', 'Zimmer', 'Kinder', 'American', 'Southwest', 'Ball', 'Sun', 'Arthur', 'Edison', 'Kansas', 'Invitation', 'China', 'Boston', 'Korea', 'W.', 'Universal', 'Advanced', 'Lincoln', 'Globel', 'First', 'West', 'Shaw', 'Texas', 'Ralph', 'Churchill', 'US', 'Western', 'Host', 'Federal', 'National', 'Bloom', 'Affiliated', 'Life', 'Tim', 'Inspire', 'Apartment', 'Choice', 'New', 'Innovative', 'Clean', 'Switch', 'Bank', 'Canada',
                                     'Healthcare', 'John', 'Agree', 'Ryman', 'Spirit', 'Black', 'Portland', 'Physicians', 'Hawaiian', 'Select', 'International', 'Armstrong', 'John', 'World', 'Data', 'Micro', 'Stewart',
@@ -93,22 +94,22 @@ def clean_setup(stock_list):
                                     'Frontdoor', 'Equitable', 'Aurora', 'Aesthetic', 'Victory', 'Fluor', 'Progressive', 'Fusion', 'Installed', 'Porch', 'Morgan', 'Full', 'Scholastic', 'Flux', 'Pilgrims', 'Nordic', 'CSI', 'Federated',
                                     'Allegiant', 'Fate', 'Nicholas', 'Gates', 'Jack', 'Phathom', 'Cincinnati', 'Colony', 'Flex', 'Flowers', 'Establishment', 'Consolidated', 'Chase', 'Special', 'Limestone', 'Oil', 'Merchants', 'Manchester',
                                     'Advent', 'Surface', 'Simon', 'Charles', 'Information', 'Village', 'Artesian', 'Intuit', 'Forward', 'Signature', 'Patriot', 'Precision', 'Ivy', 'Steven', 'Leap', 'Total', 'Fuel', 'Credit', 'Middlesex',
-                                    'Harrow', 'Clear', 'Radius', 'Lantern', 'Capstone', 'Rocket', ' Points', 'Standard', 'Stepan', 'Build', 'Aethlon', 'Sandy']
+                                    'Harrow', 'Clear', 'Radius', 'Lantern', 'Capstone', 'Rocket', ' Points', 'Standard', 'Stepan', 'Build', 'Aethlon', 'Sandy', 'Harmonic']
 
     removed_company_name = set(removed_company_name)
     stock_name = stock_name.difference(removed_company_name)
 
     stock_list['company_name'] = None
 
-    for idx, row in stock_list.iterrows():
-        row['company_name'] = stock_list['Name'].iloc[idx].split(' ')[0]
+    for i in range(len(stock_list)):
+        stock_list['company_name'].iloc[i] = stock_list['Name'].iloc[i].split(' ')[0]
 
     company_dict = dict()
 
     for name in stock_name:
         subset = stock_list[stock_list['company_name'] == name]
         if len(subset) > 1:
-            continue
+            pass
         else:
             company_dict[name] = subset['Symbol'].iloc[0]
 
