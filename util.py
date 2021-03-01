@@ -34,7 +34,7 @@ def clean_setup(stock_list):
         'CAP', 'CARE', 'CASH', 'BIG', 'CTO', 'DOG','EAT', 'ELSE', 'FAST', 'EVER', 'FAT', 'FLY', 'FUN', 
         'FUND', 'FREE', 'GO', 'GOGO', 'GAIN', 'BRO', 'FOLD', 'GOOD', 'ING', 'INFO', 'KNOW', 'JAN', 'LOOP',
         'MAIN', 'MAC', 'MARK', 'MEN', 'MOD', 'MOM', 'NEW', 'NICE', 'ONTO', 'PLAY', 'PLAN', 'PRE','ROLL', 'RUN',
-        'SAFE', 'SKY', 'SOLO', 'STAY', 'TEAM', 'TECH', 'TELL', 'TRUE', 'UK', 'VS', 'WELL', 'ZEAL', 'WOW', 'IPO',
+        'SAFE', 'SKY', 'SOLO', 'TEAM', 'TECH', 'TELL', 'TRUE', 'UK', 'VS', 'WELL', 'ZEAL', 'WOW', 'IPO',
         'ALTO', 'APPS', 'COKE', 'EAST', 'TEN', 'CUBA', 'SHIP', 'BF', 'CORN', 'DARE', 'LIFE', 'LIVE', 'MAN', 'MAX',
         'MIND', 'PLUS', 'RISE', 'RIDE', 'PUMP', 'BILL'
         ]
