@@ -36,7 +36,11 @@ def clean_setup(stock_list):
         'MAIN', 'MAC', 'MARK', 'MEN', 'MOD', 'MOM', 'NEW', 'NICE', 'ONTO', 'PLAY', 'PLAN', 'PRE','ROLL', 'RUN',
         'SAFE', 'SKY', 'SOLO', 'TEAM', 'TECH', 'TELL', 'TRUE', 'UK', 'VS', 'WELL', 'ZEAL', 'WOW', 'IPO',
         'ALTO', 'APPS', 'COKE', 'EAST', 'TEN', 'CUBA', 'SHIP', 'BF', 'CORN', 'DARE', 'LIFE', 'LIVE', 'MAN', 'MAX',
-        'MIND', 'PLUS', 'RISE', 'RIDE', 'PUMP', 'BILL', 'RH', 'POST', 'EOD'
+        'MIND', 'PLUS', 'RISE', 'RIDE', 'PUMP', 'BILL', 'RH', 'POST', 'EOD', 'IMO', 'NEXT', 'SEE', 'TWO', 'LOW',
+        'REAL', 'GOLD', 'NBA', 'EV', 'SAVE', 'PENN', 'MO', 'CAT', 'UK', 'HEAR', 'FANG', 'WH', 'ICE', 'BIG', 'NEW',
+        'SOS', 'CPA', 'SUB', 'ETN', 'PLAY', 'TACO', 'CUT', 'CO', 'FIVE', 'KNOW', 'LEG', 'SUN', 'PEAK', 'KEY',
+        'WING', 'BLUE', 'YELL', 'TREE', 'TOWN', 'CORN', 'RUN', 'KIDS', 'PAAS', 'CUE', 'EYES', 'LAND', 'MSCI',
+        'LIFE', 'WAT', 'JOBS', 'CRY', 'CALM', 'LIVE', 'COLD', 'VS', 'MARK', 'GROW'
         ]
     
 
