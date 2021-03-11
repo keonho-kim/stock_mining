@@ -39,9 +39,10 @@ def clean_setup(stock_list):
         'MIND', 'PLUS', 'RISE', 'RIDE', 'PUMP', 'BILL', 'RH', 'POST', 'EOD', 'IMO', 'NEXT', 'SEE', 'TWO', 'LOW',
         'REAL', 'GOLD', 'NBA', 'EV', 'SAVE', 'PENN', 'MO', 'CAT', 'UK', 'HEAR', 'FANG', 'WH', 'ICE', 'BIG', 'NEW',
         'SOS', 'CPA', 'SUB', 'ETN', 'PLAY', 'TACO', 'CUT', 'CO', 'FIVE', 'KNOW', 'LEG', 'SUN', 'PEAK', 'KEY',
-        'WING', 'BLUE', 'YELL', 'TREE', 'TOWN', 'CORN', 'RUN', 'KIDS', 'PAAS', 'CUE', 'EYES', 'LAND', 'MSCI',
+        'WING', 'BLUE', 'YELL', 'TREE', 'TOWN', 'CORN', 'KIDS', 'PAAS', 'CUE', 'EYES', 'LAND', 'MSCI',
         'LIFE', 'WAT', 'JOBS', 'CRY', 'CALM', 'LIVE', 'COLD', 'VS', 'MARK', 'GROW', 'TA', 'CAKE', 'COOL', 'DISH',
-        'HUGE', 'LAKE', 'PICK', 'TRIP', 'TURN', 'UK', 'RSI', 'DOW', 'FORD'
+        'HUGE', 'LAKE', 'PICK', 'TRIP', 'TURN', 'RSI', 'DOW', 'FORD', 'APT', 'KIM', 'LUV', 'ONE', 'OPEN', 'CBOE'
+
         ]
     
 
