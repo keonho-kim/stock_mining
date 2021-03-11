@@ -41,7 +41,7 @@ def clean_setup(stock_list):
         'SOS', 'CPA', 'SUB', 'ETN', 'PLAY', 'TACO', 'CUT', 'CO', 'FIVE', 'KNOW', 'LEG', 'SUN', 'PEAK', 'KEY',
         'WING', 'BLUE', 'YELL', 'TREE', 'TOWN', 'CORN', 'RUN', 'KIDS', 'PAAS', 'CUE', 'EYES', 'LAND', 'MSCI',
         'LIFE', 'WAT', 'JOBS', 'CRY', 'CALM', 'LIVE', 'COLD', 'VS', 'MARK', 'GROW', 'TA', 'CAKE', 'COOL', 'DISH',
-        'HUGE', 'LAKE', 'PICK', 'TRIP', 'TURN', 'UK'
+        'HUGE', 'LAKE', 'PICK', 'TRIP', 'TURN', 'UK', 'RSI', 'DOW', 'FORD'
         ]
     
 
