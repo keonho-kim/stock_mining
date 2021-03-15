@@ -42,7 +42,7 @@ def clean_setup(stock_list):
         'WING', 'BLUE', 'YELL', 'TREE', 'TOWN', 'CORN', 'KIDS', 'PAAS', 'CUE', 'EYES', 'LAND', 'MSCI',
         'LIFE', 'WAT', 'JOBS', 'CRY', 'CALM', 'LIVE', 'COLD', 'VS', 'MARK', 'GROW', 'TA', 'CAKE', 'COOL', 'DISH',
         'HUGE', 'LAKE', 'PICK', 'TRIP', 'TURN', 'RSI', 'DOW', 'FORD', 'APT', 'KIM', 'LUV', 'ONE', 'OPEN', 'CBOE',
-        'PM', 'ATM', 'AH', 'GL', 'OP'
+        'PM', 'ATM', 'AH', 'GL', 'OP', 'KO'
         ]
     
 
